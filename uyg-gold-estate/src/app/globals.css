@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0a08;
+  --gold: #c9a962;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--ink);
+  color: #f3efe6;
+  font-feature-settings: "ss01" on, "cv01" on;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(201, 169, 98, 0.35);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a08;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b3a26;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a962;
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-luxe text-gold;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-gold/70;
+  }
+
+  .heading-xl {
+    @apply font-display text-4xl font-medium leading-[1.05] tracking-tight text-cream sm:text-5xl lg:text-6xl;
+  }
+  .heading-lg {
+    @apply font-display text-3xl font-medium leading-[1.1] tracking-tight text-cream sm:text-4xl lg:text-5xl;
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-btn bg-gold px-8 py-4 text-sm font-semibold tracking-wide text-ink transition-all duration-500 ease-luxe hover:bg-gold-soft hover:shadow-gold-glow active:scale-[0.97];
+  }
+
+  .btn-ghost {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-btn border border-cream/25 px-8 py-4 text-sm font-medium tracking-wide text-cream backdrop-blur-sm transition-all duration-500 ease-luxe hover:border-gold/70 hover:text-gold active:scale-[0.97];
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .card-luxe {
+    @apply relative overflow-hidden rounded-card border border-white/[0.07] bg-graphite shadow-luxe transition-all duration-700 ease-luxe;
+  }
+  .card-luxe:hover {
+    @apply -translate-y-1.5 border-gold/30 shadow-gold-glow;
+  }
+
+  /* Hover'da yer değiştirmeyen sabit kart (ekip kartları gibi) */
+  .card-still {
+    @apply relative overflow-hidden rounded-card border border-white/[0.07] bg-graphite shadow-luxe transition-all duration-700 ease-luxe;
+  }
+  .card-still:hover {
+    @apply border-gold/30 shadow-gold-glow;
+  }
+}
+
+/* Serif italic accent inside headings */
+.accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: #c9a962;
+}
+
+/* Gold divider line */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 98, 0.5),
+    transparent
+  );
+}
+
+/* Image hover zoom wrapper */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.07);
+}
+
+/* Marquee for cities strip */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Swiper pagination theming */
+.swiper-pagination-bullet {
+  background: rgba(243, 239, 230, 0.35) !important;
+  opacity: 1 !important;
+}
+.swiper-pagination-bullet-active {
+  background: #c9a962 !important;
+  width: 24px !important;
+  border-radius: 999px !important;
+  transition: width 0.4s ease;
+}

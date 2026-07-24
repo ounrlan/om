@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f7efe2;
+  --cream2: #f0e3cb;
+  --pine: #0e3b2e;
+  --ink: rgba(14, 59, 46, 0.78);
+  --sesame: #d4a94c;
+  --coffee: #8b5e34;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* sticky header için anchor ofseti */
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(212, 169, 76, 0.32);
+  color: var(--pine);
+}
+
+/* Görünür focus — susam altını her iki zeminde de okunur */
+:focus-visible {
+  outline: 2px solid var(--sesame);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream2);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbb98f;
+  border-radius: 8px;
+  border: 2px solid var(--cream2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sesame);
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Küçük kahve etiket + öncesinde çizgi */
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-[13px] font-semibold uppercase tracking-label text-coffee;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-7 bg-coffee/50;
+  }
+
+  /* Başlıklar */
+  .heading-xl {
+    @apply font-display text-[34px] font-semibold leading-[1.08] tracking-tightlg text-pine sm:text-5xl lg:text-[3.5rem];
+  }
+  .heading-lg {
+    @apply font-display text-3xl font-semibold leading-[1.1] tracking-tightlg text-pine sm:text-[2.5rem] lg:text-[2.85rem];
+  }
+
+  /* İmza birincil buton — hover'da -4,-4 kayar, arkasında susam gölge-kartı belirir.
+     Kart, .btn-shell içinde SABİT bir kardeş; buton üstte kayar. */
+  .btn-shell {
+    @apply relative inline-flex;
+  }
+  .btn-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 7px;
+    background: var(--sesame);
+    border: 1px solid var(--pine);
+    z-index: 0;
+  }
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-btn px-7 py-3.5 font-mono text-[13px] font-semibold uppercase tracking-label;
+    z-index: 1;
+    background: var(--pine);
+    color: var(--cream);
+    transition: transform 0.12s ease;
+  }
+  .btn-primary--cream {
+    background: var(--cream);
+    color: var(--pine);
+  }
+  .btn-shell:hover .btn-primary {
+    transform: translate(-4px, -4px);
+  }
+  .btn-shell:active .btn-primary {
+    transform: translate(-2px, -2px);
+  }
+
+  /* Metin-link CTA — uppercase, altı çizili; hover'da çizgi kalınlaşır */
+  .text-link {
+    @apply inline-flex items-center gap-1.5 font-mono text-[13px] font-semibold uppercase tracking-label text-pine;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition:
+      text-decoration-thickness 0.12s ease,
+      gap 0.12s ease;
+  }
+  .text-link:hover {
+    text-decoration-thickness: 3px;
+  }
+  .text-link--cream {
+    color: var(--cream);
+  }
+
+  /* Kart */
+  .card {
+    @apply relative overflow-hidden rounded-card bg-cream2;
+  }
+}
+
+/* İkon hover — hafif büyüme */
+.hover-scale {
+  transition: transform 0.15s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.07);
+}
+
+/* Kaydırıcıda scrollbar gizle */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee — %50 kayar (içerik iki kez tekrar edildiği için kusursuz döngü) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 40s linear infinite;
+}
+
+/* Erişilebilirlik — hareketi azalt */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
