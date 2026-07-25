@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, LogIn, Menu, Phone, X } from "lucide-react";
 import Logo from "./Logo";
 import { CONTACT, NAV_CATEGORIES } from "@/data/site";
 
@@ -81,6 +81,13 @@ export default function Navbar() {
             <Phone size={15} className="text-gold" />
             {CONTACT.phone}
           </a>
+          <Link
+            href="/panel"
+            className="flex items-center gap-1.5 rounded-full border border-gold/30 px-4 py-2 text-[13px] font-medium text-gold transition-all duration-300 hover:border-gold/70 hover:shadow-gold-glow"
+          >
+            <LogIn size={14} />
+            Emlakçı Girişi
+          </Link>
           <a href="#iletisim" className="btn-gold !px-6 !py-2.5 !text-[13px]">
             Randevu Al
           </a>
@@ -155,6 +162,14 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <Link
+                href="/panel"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 flex items-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-gold transition-colors hover:bg-white/[0.04]"
+              >
+                <LogIn size={16} />
+                Emlakçı Girişi
+              </Link>
               <a
                 href="#iletisim"
                 onClick={() => setMobileOpen(false)}
