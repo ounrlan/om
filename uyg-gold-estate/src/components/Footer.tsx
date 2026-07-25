@@ -1,7 +1,8 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
-import { Mail, Phone, MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { Mail, Phone, MapPin, ArrowRight, MessageCircle, LogIn } from "lucide-react";
 import { InstagramIcon } from "./SocialIcons";
 import Logo from "./Logo";
 import { CONTACT, SAHIBINDEN, GOOGLE } from "@/data/site";
@@ -181,6 +182,15 @@ export default function Footer() {
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                href="/panel"
+                className="inline-flex items-center gap-1.5 text-gold/70 transition-colors hover:text-gold"
+              >
+                <LogIn size={13} />
+                Emlakçı Girişi
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
