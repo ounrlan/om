@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --porcelain: #f7f6f2;
+  --graphite: #2c2e33;
+  --gold: #b68a44;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--porcelain);
+  color: #44474d;
+  font-feature-settings: "ss01" on, "cv01" on;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(182, 138, 68, 0.25);
+  color: #1b1c20;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: #efede7;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfcabb;
+  border-radius: 8px;
+  border: 2px solid #efede7;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b68a44;
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14;
+  }
+
+  /* Küçük altın etiket + öncesinde çizgi */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-luxe text-gold-deep;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-8 bg-gold/60;
+  }
+  /* Koyu zeminde eyebrow */
+  .eyebrow-light {
+    @apply text-gold-soft;
+  }
+
+  .heading-xl {
+    @apply font-display text-4xl font-semibold leading-[1.06] tracking-tight text-ink sm:text-5xl lg:text-6xl;
+  }
+  .heading-lg {
+    @apply font-display text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-btn bg-gold px-8 py-4 text-sm font-semibold tracking-wide text-white shadow-soft transition-all duration-500 ease-luxe hover:bg-gold-deep hover:shadow-gold-glow active:scale-[0.97];
+  }
+
+  /* Açık zeminde ince kenarlıklı buton */
+  .btn-outline {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-btn border border-slate/25 px-8 py-4 text-sm font-medium tracking-wide text-slate transition-all duration-500 ease-luxe hover:border-gold hover:text-gold-deep active:scale-[0.97];
+  }
+  /* Koyu zeminde ince kenarlıklı buton */
+  .btn-ghost {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-btn border border-white/25 px-8 py-4 text-sm font-medium tracking-wide text-white/90 backdrop-blur-sm transition-all duration-500 ease-luxe hover:border-gold-soft hover:text-gold-soft active:scale-[0.97];
+  }
+
+  /* Açık cam efekti (koyu zemin üstünde) */
+  .glass-dark {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-xl;
+  }
+
+  .card {
+    @apply relative overflow-hidden rounded-card border border-mist bg-pearl shadow-soft transition-all duration-500 ease-luxe;
+  }
+  .card:hover {
+    @apply -translate-y-1.5 border-gold/40 shadow-card;
+  }
+
+  /* Hover'da yer değiştirmeyen sabit kart */
+  .card-still {
+    @apply relative overflow-hidden rounded-card border border-mist bg-pearl shadow-soft transition-all duration-500 ease-luxe;
+  }
+  .card-still:hover {
+    @apply border-gold/40 shadow-card;
+  }
+}
+
+/* Serif italic aksan (başlık içinde) */
+.accent-serif {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: #8a6a2c;
+}
+/* Koyu zeminde serif aksan */
+.accent-serif-light {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: #d9c08a;
+}
+
+/* Altın ayraç çizgisi */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(182, 138, 68, 0.45),
+    transparent
+  );
+}
+
+/* Görsel hover zoom sarmalayıcı */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.07);
+}
+
+/* Şehir şeridi için kayan animasyon */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Yorum şeridi: okunabilirlik için daha yavaş akar, üzerine gelince durur */
+.animate-marquee-reviews {
+  animation: marquee 38s linear infinite;
+}
+.animate-marquee-reviews:hover {
+  animation-play-state: paused;
+}

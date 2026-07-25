@@ -1,13 +1,14 @@
 # UYG Ortak Projeler
 
-Bu depo iki web sitesi projesini içerir. İkisi de **Next.js 14 + Tailwind CSS** ile geliştirilmiştir.
+Bu depo üç web sitesi projesini içerir. Hepsi **Next.js 14 + Tailwind CSS** ile geliştirilmiştir.
 
 | Klasör | Proje | Açıklama |
 | --- | --- | --- |
 | [`uyg-gold-estate/`](uyg-gold-estate/) | **UYG Gold Estate** | Ankara Bağlıca merkezli lüks emlak sitesi (altın + koyu tema) |
 | [`has-simit-firin/`](has-simit-firin/) | **Has Simit & Fırın** | Bağlıca/Etimesgut fırını sitesi (yeşil + krem tema) |
+| [`eniscoskun-estate/`](eniscoskun-estate/) | **Enis Coşkun Gayrimenkul** | Eryaman/Etimesgut emlak sitesi |
 
-## Kurulum (her iki proje için ayrı ayrı)
+## Kurulum (her proje için ayrı ayrı)
 
 Bilgisayarınızda **Node.js 18+** kurulu olmalıdır ([nodejs.org](https://nodejs.org)).
 
