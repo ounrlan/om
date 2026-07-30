@@ -101,7 +101,7 @@ export const products = {
       desc: "Susamıyla bol, dışı çıtır içi yumuşacık. Sade ya da bol tereyağlı — sabahın vazgeçilmez klasiği.",
     },
     {
-      image: `${BASE}/images/urun-pogaca.png`,
+      image: `${BASE}/images/urun-pogaca.webp`,
       alt: "Tepside fırından yeni çıkmış, üzeri bol susamlı poğaçalar",
       tag: "Fırından Sıcak",
       no: "02",

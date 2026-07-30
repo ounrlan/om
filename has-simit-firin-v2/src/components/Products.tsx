@@ -40,7 +40,8 @@ export default function Products() {
                 className="group block h-full"
               >
                 <article className="h-full">
-                  <div className="img-frame relative aspect-[4/5]">
+                  {/* 4/3: ürün fotoğraflarının doğal oranı — büyütme olmaz, net kalır */}
+                  <div className="img-frame relative aspect-[4/3]">
                     <Image
                       src={item.image}
                       alt={item.alt}
