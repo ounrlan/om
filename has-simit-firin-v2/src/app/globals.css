@@ -1,0 +1,336 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --night: #080c0a;
+  --night2: #0d1310;
+  --night3: #131c17;
+  --cream: #f3eadb;
+  --gold: #d4b16a;
+  --goldlt: #f1e1b4;
+  --golddk: #9c7828;
+  --copper: #b98a55;
+  /* Altın hairline — tüm ayraç/çerçevelerde tek kaynak */
+  --hair: rgba(212, 177, 106, 0.18);
+  --hair-strong: rgba(212, 177, 106, 0.42);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+  background: var(--night);
+}
+
+body {
+  background-color: var(--night);
+  color: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(212, 177, 106, 0.28);
+  color: var(--goldlt);
+}
+
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Scrollbar — ince, altın */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--night);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 177, 106, 0.28);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1280px] px-6 sm:px-10 lg:px-16;
+  }
+
+  /* ── Bölüm etiketi: 01 — ÜRÜNLER ── */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-label text-gold;
+  }
+  .eyebrow::after {
+    content: "";
+    @apply block h-px w-12;
+    background: linear-gradient(90deg, var(--hair-strong), transparent);
+  }
+
+  /* ── Başlıklar: yüksek kontrastlı, ince ağırlıklı serif ── */
+  .heading-xl {
+    @apply font-display font-light leading-[1.02] tracking-tightlg text-cream;
+    font-size: clamp(2.85rem, 7.2vw, 6.25rem);
+  }
+  .heading-lg {
+    @apply font-display font-light leading-[1.06] tracking-tightlg text-cream;
+    font-size: clamp(2.1rem, 4.6vw, 3.75rem);
+  }
+  .heading-md {
+    @apply font-display font-light leading-[1.12] tracking-tightlg text-cream;
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  }
+
+  /* Altın varak metin — yalnızca tek kelimelik vurgular için */
+  .gold-text {
+    background: linear-gradient(
+      170deg,
+      var(--goldlt) 0%,
+      var(--gold) 42%,
+      var(--golddk) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── İmza buton: altın hairline çerçeve, hover'da varak dolgusu + ışık süpürmesi ── */
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-btn px-9 py-4 font-mono text-[11px] font-medium uppercase tracking-label text-gold;
+    border: 1px solid var(--hair-strong);
+    background: transparent;
+    transition:
+      color 0.45s ease,
+      border-color 0.45s ease;
+  }
+  /* Dolgu — soldan sağa açılan varak katmanı */
+  .btn-gold::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--goldlt) 0%,
+      var(--gold) 48%,
+      var(--golddk) 100%
+    );
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+  /* Işık süpürmesi */
+  .btn-gold::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 34%;
+    left: -50%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    transform: skewX(-18deg);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .btn-gold > * {
+    position: relative;
+    z-index: 1;
+  }
+  .btn-gold:hover {
+    color: var(--night);
+    border-color: transparent;
+  }
+  .btn-gold:hover::before {
+    transform: scaleX(1);
+  }
+  .btn-gold:hover::after {
+    opacity: 1;
+    animation: sheen 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+  }
+  /* Dolu varyant — başlangıçtan itibaren dolu varak */
+  .btn-gold--solid {
+    color: var(--night);
+    border-color: transparent;
+  }
+  .btn-gold--solid::before {
+    transform: scaleX(1);
+  }
+  .btn-gold--solid:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* ── Metin link: altındaki altın çizgi soldan açılır ── */
+  .link-gold {
+    @apply relative inline-flex items-center gap-2 pb-1 font-mono text-[11px] font-medium uppercase tracking-label text-cream;
+    transition: color 0.3s ease;
+  }
+  .link-gold::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--hair-strong);
+  }
+  .link-gold::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-gold:hover {
+    color: var(--gold);
+  }
+  .link-gold:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Hairline çerçeveli yüzey ── */
+  .hair-frame {
+    border: 1px solid var(--hair);
+    background: var(--night2);
+  }
+
+  /* Görsel çerçevesi — içeriden 1px altın kontur */
+  .img-frame {
+    @apply relative overflow-hidden rounded-card;
+  }
+  .img-frame::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(243, 234, 219, 0.16);
+    pointer-events: none;
+    z-index: 2;
+    transition: inset 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.6s ease;
+  }
+  .group:hover .img-frame::after {
+    inset: 16px;
+    border-color: rgba(212, 177, 106, 0.55);
+  }
+}
+
+/* Işık süpürmesi keyframe'i */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(360%) skewX(-18deg);
+  }
+}
+
+/* Film grenliği — tüm sayfanın üzerinde çok hafif doku */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Üstten aşağı altın vinyet — hero üzerindeki header okunurluğu */
+.top-veil {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 12, 10, 0.92) 0%,
+    rgba(8, 12, 10, 0.55) 55%,
+    transparent 100%
+  );
+}
+
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-scale:hover {
+  transform: scale(1.08);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee — %50 kayar (içerik iki kez tekrar edilir) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 46s linear infinite;
+}
+
+/* Susam yağmuru — saf CSS animasyonu (GPU compositor'da çalışır, JS yükü yok).
+   Tane başına değerler custom property ile verilir. */
+@keyframes sesame-fall {
+  0% {
+    transform: translate3d(0, var(--y0), 0) rotate(0deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--y1), 0) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+.sesame-grain {
+  position: absolute;
+  top: 0;
+  will-change: transform, opacity;
+  animation: sesame-fall var(--dur) linear var(--dly) both;
+}
+
+/* Koyu harita — Google iframe'ini gece paletine çevirir */
+.map-dark {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.55) brightness(0.92)
+    contrast(0.92);
+}
+
+/* Erişilebilirlik — hareketi azalt */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
